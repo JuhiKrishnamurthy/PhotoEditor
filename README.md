@@ -1,1 +1,3 @@
 # PhotoEditor
+This is a C++ project which I made for my class 12 Computer Science course. It is a command line driven image editor which takes a simple 24 bit BMP files as input and performs some basic image manipulations such as rotation, reflection , cropping, resizing, superimposing another image on it etc. This program allows you to perform a series of such manipulations one after another on the same image. For example you can superimpose two images , followed by resize operation and reflection. The original image is not destroyed. The final image is saved as a new file. 
+This has been tested on a mac computer and it should compile and work on other platforms as well. 
