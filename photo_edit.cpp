@@ -616,12 +616,14 @@ void showChoices()
 	cout << "Enter your choice :";
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     cout << "size of file header: " << sizeof(BMPFileHeader) <<endl;
     cout << "size of info header: " << sizeof(BMPInfoHeader) <<endl;
     getchar();
-    BMP bmptest("clegg.bmp");
+    char* input_file_name = argv[1];
+    char* output_file_name = argv[2];
+    BMP bmptest(input_file_name);
     bmptest.DisplayHeaders();
      int choice;
      int val,valb,valg,valr,angle;
@@ -642,7 +644,7 @@ int main()
 			  cout<<" enter the B G and R values of the region to be filled."<<endl;
 			  cin>>valb>>valg>>valr;
 			  bmptest.fill_region(x1,y1,x2,y2,valb,valg,valr);
-			  bmptest.write("clegg_1cpy.bmp");
+			  bmptest.write(argv[2]);
 			  cout<<"Done fill."<<endl;
 			  break;
 			 }
@@ -651,20 +653,20 @@ int main()
 			  cout<<" enter the angle at which you wish the image to be rotated. "<<endl;
 			  cin>>angle;
 			  bmptest.rotate(angle);
-			  bmptest.write("clegg_1cpy.bmp");
+			  bmptest.write(output_file_name);
 			  cout<<" done rotate."<<endl;
 			  break;
 			}
 		case 3:
 			{ 
 			  bmptest.mirror_reflection();
-              bmptest.write("clegg_1cpy.bmp");
+              bmptest.write(output_file_name);
               cout<<" done mirror reflection "<<endl;
 			  break;
 			}
 		case 4:
 			{ bmptest.water_reflection();
-              bmptest.write("clegg_1cpy.bmp");
+              bmptest.write(output_file_name);
               cout<<" done water reflection "<<endl;
 			  break;
 			}
@@ -673,7 +675,7 @@ int main()
               cout<<" enter the value with which you wish to enlarge the image "<<endl;
               cin>>val;
               bmptest.enlarge(val);
-              bmptest.write("clegg_1cpy.bmp");
+              bmptest.write(output_file_name);
               cout<<" done enlarge "<<endl;
 			  break;
 		    }
@@ -682,7 +684,7 @@ int main()
 		      cout<<" enter the value with which you wish to brighten/darken the image "<<endl;
 		      cin>>brtvalue;
 		      bmptest.brightness(brtvalue);
-		      bmptest.write("clegg_1cpy.bmp");
+		      bmptest.write(output_file_name);
 		      cout<<" done brightness "<<endl;
 		      break;
 		    }
@@ -691,7 +693,7 @@ int main()
 		      cout<<" enter the value with which you wish to reduce the image "<<endl;
 		      cin>>val;
 		      bmptest.reduction(val);
-		      bmptest.write("clegg_1cpy.bmp");
+		      bmptest.write(output_file_name);
 		      cout<<"done reduce "<<endl;
 		      break;
 		    }
@@ -702,7 +704,7 @@ int main()
 		      cout<<" enter the end x and y coordinates at which you wish to crop the image"<<endl;
 		      cin>>x2>>y2;
 		      bmptest.crop(x1,y1,x2,y2);
-		      bmptest.write("clegg_1cpy.bmp");
+		      bmptest.write(output_file_name);
 		      cout<<" done crop "<<endl;
 		      break;
 		    }
@@ -710,11 +712,14 @@ int main()
 		    { 
 		      cout<<" enter the x and y coordinates of the place where you wish to superimpose the other image."<<endl;
 		      cin>>x1>>y1;
-		      BMP suptest("penguin.bmp");
+		      cout << "enter the file you want to superimpose: "<<endl;
+		      char sup_file_name[80];
+		      cin >> sup_file_name;
+		      BMP suptest(sup_file_name);
 		      x2=suptest.bmp_info_header.width;
 		      y2=suptest.bmp_info_header.height;
               bmptest.superimpose(x1,y1,x2,y2,suptest.data);
-              bmptest.write("clegg_1cpy.bmp");
+              bmptest.write(output_file_name);
               break;
             }
         case 10:
